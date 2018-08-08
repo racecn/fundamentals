@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>KeyInput.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(0,0,255); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+KeyInput.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">import </span><span class="s1">java.awt.event.KeyAdapter; 
+</span><span class="s0">import </span><span class="s1">java.awt.event.KeyEvent; 
+</span><span class="s0">import </span><span class="s1">java.security.Key; 
+ 
+</span><span class="s0">public class </span><span class="s1">KeyInput </span><span class="s0">extends </span><span class="s1">KeyAdapter { 
+ 
+    </span><span class="s0">private </span><span class="s1">Handler handler; 
+ 
+    </span><span class="s0">public </span><span class="s1">KeyInput(Handler handler) { 
+        </span><span class="s0">this</span><span class="s1">.handler = handler; 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">keyPressed(KeyEvent e) { 
+        </span><span class="s0">int </span><span class="s1">key = e.getKeyCode(); 
+ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; handler.object.size(); i++) { 
+            GameObject tempObject = handler.object.get(i); 
+ 
+            </span><span class="s0">if </span><span class="s1">(tempObject.getId() == ID.Player) { 
+                </span><span class="s3">//key events for player 1</span><span class="s1"> 
+ 
+                </span><span class="s0">if </span><span class="s1">(key == KeyEvent.VK_UP) tempObject.setVelY(-</span><span class="s2">5</span><span class="s1">); 
+                </span><span class="s0">if </span><span class="s1">(key == KeyEvent.VK_DOWN) tempObject.setVelY(</span><span class="s2">5</span><span class="s1">); 
+                </span><span class="s0">if </span><span class="s1">(key == KeyEvent.VK_LEFT) tempObject.setVelX(-</span><span class="s2">5</span><span class="s1">); 
+                </span><span class="s0">if </span><span class="s1">(key == KeyEvent.VK_RIGHT) tempObject.setVelX(</span><span class="s2">5</span><span class="s1">); 
+ 
+ 
+            } 
+        } 
+        </span><span class="s0">if </span><span class="s1">( key == KeyEvent.VK_ESCAPE) System.exit(</span><span class="s2">0</span><span class="s1">); 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">keyReleased(KeyEvent e) { 
+        </span><span class="s0">int </span><span class="s1">key = e.getKeyCode(); 
+ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; handler.object.size(); i++) { 
+            GameObject tempObject = handler.object.get(i); 
+ 
+            </span><span class="s0">if </span><span class="s1">(tempObject.getId() == ID.Player) { 
+                </span><span class="s3">//key events for player 1</span><span class="s1"> 
+ 
+                </span><span class="s0">if </span><span class="s1">(key == KeyEvent.VK_UP) tempObject.setVelY(</span><span class="s2">0</span><span class="s1">); 
+                </span><span class="s0">if </span><span class="s1">(key == KeyEvent.VK_DOWN) tempObject.setVelY(</span><span class="s2">0</span><span class="s1">); 
+                </span><span class="s0">if </span><span class="s1">(key == KeyEvent.VK_LEFT) tempObject.setVelX(</span><span class="s2">0</span><span class="s1">); 
+                </span><span class="s0">if </span><span class="s1">(key == KeyEvent.VK_RIGHT) tempObject.setVelX(</span><span class="s2">0</span><span class="s1">); 
+            } 
+        } 
+    } 
+} 
+</span></pre>
+</body>
+</html>

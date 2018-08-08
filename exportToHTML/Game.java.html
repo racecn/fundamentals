@@ -1,0 +1,147 @@
+<html>
+<head>
+<title>Game.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(0,0,255); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Game.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">import </span><span class="s1">java.awt.*; 
+</span><span class="s0">import </span><span class="s1">java.awt.image.BufferStrategy; 
+</span><span class="s0">import </span><span class="s1">java.util.Random; 
+ 
+</span><span class="s0">public class </span><span class="s1">Game </span><span class="s0">extends </span><span class="s1">Canvas </span><span class="s0">implements </span><span class="s1">Runnable { 
+ 
+    </span><span class="s0">private static final long </span><span class="s1">serialVersionUID = </span><span class="s2">7541542548355040915L</span><span class="s1">; 
+ 
+    </span><span class="s0">public static final int </span><span class="s1">WIDTH = </span><span class="s2">640</span><span class="s1">, HEIGHT = WIDTH / </span><span class="s2">12 </span><span class="s1">* </span><span class="s2">9</span><span class="s1">; 
+    </span><span class="s0">private </span><span class="s1">Thread thread; 
+    </span><span class="s0">private boolean </span><span class="s1">running = </span><span class="s0">false</span><span class="s1">; 
+ 
+    </span><span class="s0">private </span><span class="s1">Random r; 
+    </span><span class="s0">private </span><span class="s1">Handler handler; 
+    </span><span class="s0">private </span><span class="s1">HUD hud; 
+    </span><span class="s0">private </span><span class="s1">Spawn spawner; 
+ 
+    </span><span class="s0">public synchronized void </span><span class="s1">start(){ 
+        thread = </span><span class="s0">new </span><span class="s1">Thread(</span><span class="s0">this</span><span class="s1">); 
+        thread.start(); 
+        running = </span><span class="s0">true</span><span class="s1">; 
+    } 
+ 
+    </span><span class="s0">public synchronized void </span><span class="s1">stop(){ 
+       </span><span class="s0">try</span><span class="s1">{ 
+           thread.join(); 
+           running = </span><span class="s0">false</span><span class="s1">; 
+ 
+       } </span><span class="s0">catch</span><span class="s1">(Exception e){ 
+           e.printStackTrace(); 
+           </span><span class="s3">//sends a bug to console</span><span class="s1"> 
+       } 
+    } 
+ 
+    </span><span class="s0">public </span><span class="s1">Game(){ 
+        handler = </span><span class="s0">new </span><span class="s1">Handler(); 
+        </span><span class="s0">this</span><span class="s1">.addKeyListener(</span><span class="s0">new </span><span class="s1">KeyInput(handler)); 
+        </span><span class="s0">new </span><span class="s1">Window(WIDTH, HEIGHT,</span><span class="s4">&quot;Let's Build a Game&quot;</span><span class="s1">, </span><span class="s0">this</span><span class="s1">); 
+ 
+        hud = </span><span class="s0">new </span><span class="s1">HUD(); 
+        spawner = </span><span class="s0">new </span><span class="s1">Spawn(handler, hud); 
+        r = </span><span class="s0">new </span><span class="s1">Random(); 
+ 
+        </span><span class="s3">//create player character</span><span class="s1"> 
+        handler.addObject(</span><span class="s0">new </span><span class="s1">Player(WIDTH/</span><span class="s2">2</span><span class="s1">-</span><span class="s2">32</span><span class="s1">, HEIGHT/</span><span class="s2">2</span><span class="s1">-</span><span class="s2">32</span><span class="s1">, ID.Player, handler)); 
+        </span><span class="s3">//create first level's enemy</span><span class="s1"> 
+        handler.addObject(</span><span class="s0">new </span><span class="s1">BasicEnemy(</span><span class="s2">300</span><span class="s1">, </span><span class="s2">300</span><span class="s1">, ID.BasicEnemy, handler)); 
+ 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">run(){ 
+        </span><span class="s0">this</span><span class="s1">.requestFocus(); 
+        </span><span class="s3">//game runtime loop</span><span class="s1"> 
+        </span><span class="s0">long </span><span class="s1">lastTime = System.nanoTime(); 
+        </span><span class="s0">double </span><span class="s1">amountOfTicks = </span><span class="s2">60.0</span><span class="s1">; 
+        </span><span class="s0">double </span><span class="s1">ns = </span><span class="s2">1000000000 </span><span class="s1">/ amountOfTicks; 
+        </span><span class="s0">double </span><span class="s1">delta = </span><span class="s2">0</span><span class="s1">; 
+        </span><span class="s0">long </span><span class="s1">timer = System.currentTimeMillis(); 
+        </span><span class="s0">int </span><span class="s1">frames = </span><span class="s2">0</span><span class="s1">; 
+        </span><span class="s0">while </span><span class="s1">(running){ 
+            </span><span class="s0">long </span><span class="s1">now = System.nanoTime(); 
+            delta += ( now - lastTime) / ns; 
+            lastTime = now; 
+            </span><span class="s0">while </span><span class="s1">( delta &gt;= </span><span class="s2">1</span><span class="s1">){ 
+                tick(); 
+                delta--; 
+            } 
+            </span><span class="s0">if </span><span class="s1">( running ) 
+                render(); 
+            frames++; 
+ 
+            </span><span class="s0">if</span><span class="s1">(System.currentTimeMillis() - timer &gt; </span><span class="s2">1000</span><span class="s1">){ 
+                timer += </span><span class="s2">1000</span><span class="s1">; 
+                </span><span class="s3">//System.out.println(&quot;FPS: &quot; + frames);</span><span class="s1"> 
+                frames = </span><span class="s2">0</span><span class="s1">; 
+            } 
+        } 
+        stop(); 
+    } 
+ 
+    </span><span class="s0">private void </span><span class="s1">tick(){ 
+        handler.tick(); 
+        hud.tick(); 
+        spawner.tick(); 
+    } 
+ 
+    </span><span class="s0">private void </span><span class="s1">render(){ 
+        </span><span class="s3">//rendering systeml</span><span class="s1"> 
+        BufferStrategy bs = </span><span class="s0">this</span><span class="s1">.getBufferStrategy(); 
+        </span><span class="s0">if </span><span class="s1">( bs == </span><span class="s0">null </span><span class="s1">){ 
+            </span><span class="s0">this</span><span class="s1">.createBufferStrategy(</span><span class="s2">3</span><span class="s1">); 
+            </span><span class="s0">return</span><span class="s1">; 
+        } 
+ 
+        Graphics g = bs.getDrawGraphics(); 
+ 
+        g.setColor(Color.black); 
+        g.fillRect(</span><span class="s2">0</span><span class="s1">,</span><span class="s2">0</span><span class="s1">,WIDTH,HEIGHT); 
+ 
+        handler.render(g); 
+ 
+        hud.render(g); 
+ 
+        g.dispose(); 
+        bs.show(); 
+ 
+    } 
+ 
+    </span><span class="s0">public static int </span><span class="s1">clamp( </span><span class="s0">int </span><span class="s1">var, </span><span class="s0">int </span><span class="s1">min, </span><span class="s0">int </span><span class="s1">max){ 
+        </span><span class="s0">if </span><span class="s1">( var &gt;= max){ 
+            </span><span class="s0">return </span><span class="s1">var = max; 
+        } </span><span class="s0">else if </span><span class="s1">( var &lt;=min){ 
+            </span><span class="s0">return </span><span class="s1">var = min; 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            </span><span class="s0">return </span><span class="s1">var; 
+        } 
+    } 
+ 
+    </span><span class="s0">public static void </span><span class="s1">main(String args[]){ 
+ 
+        </span><span class="s0">new </span><span class="s1">Game(); 
+    } 
+ 
+} 
+</span></pre>
+</body>
+</html>

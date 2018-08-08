@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Player.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(0,0,255); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Player.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">import </span><span class="s1">java.awt.*; 
+</span><span class="s0">import </span><span class="s1">java.util.Random; 
+ 
+</span><span class="s0">public class </span><span class="s1">Player </span><span class="s0">extends </span><span class="s1">GameObject { 
+ 
+    Random r = </span><span class="s0">new </span><span class="s1">Random(); 
+    Handler handler; 
+ 
+    </span><span class="s0">public </span><span class="s1">Player( </span><span class="s0">int </span><span class="s1">x, </span><span class="s0">int </span><span class="s1">y, ID id, Handler handler){ 
+        </span><span class="s0">super</span><span class="s1">(x, y , id); 
+        </span><span class="s0">this</span><span class="s1">.handler = handler; 
+    } 
+    </span><span class="s0">public </span><span class="s1">Rectangle getBounds() { 
+        </span><span class="s0">return new </span><span class="s1">Rectangle(x, y, </span><span class="s2">32</span><span class="s1">,</span><span class="s2">32</span><span class="s1">); 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">tick(){ 
+        x += velX; 
+        y += velY; 
+ 
+        x = Game.clamp( x, </span><span class="s2">0</span><span class="s1">, Game.WIDTH - </span><span class="s2">37 </span><span class="s1">); 
+        y = Game.clamp( y , </span><span class="s2">0 </span><span class="s1">, Game.HEIGHT - </span><span class="s2">60</span><span class="s1">); 
+ 
+        collision(); 
+ 
+    } 
+ 
+    </span><span class="s0">private void </span><span class="s1">collision(){ 
+        </span><span class="s0">for </span><span class="s1">( </span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; handler.object.size(); i++){ 
+ 
+            GameObject tempObject = handler.object.get(i); 
+ 
+            </span><span class="s0">if</span><span class="s1">(tempObject.getId() == ID.BasicEnemy &amp;&amp; getBounds().intersects(tempObject.getBounds())){ 
+ 
+                HUD.HEALTH -= </span><span class="s2">2</span><span class="s1">; 
+ 
+            } 
+        } 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">render(Graphics g ){ 
+        </span><span class="s0">if</span><span class="s1">( id == ID.Player) g.setColor(Color.lightGray); 
+        g.setColor(Color.white); 
+        g.fillRect(x, y, </span><span class="s2">32 </span><span class="s1">,</span><span class="s2">32</span><span class="s1">); 
+    } 
+ 
+    </span><span class="s3">//clamp method</span><span class="s1"> 
+ 
+} 
+</span></pre>
+</body>
+</html>

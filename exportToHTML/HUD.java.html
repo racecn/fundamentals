@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>HUD.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(0,0,255); }
+.s3 { color: rgb(0,128,0); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+HUD.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">import </span><span class="s1">javax.imageio.ImageIO; 
+</span><span class="s0">import </span><span class="s1">javax.swing.*; 
+</span><span class="s0">import </span><span class="s1">java.awt.*; 
+</span><span class="s0">import </span><span class="s1">java.awt.image.BufferedImage; 
+</span><span class="s0">import </span><span class="s1">java.io.File; 
+ 
+</span><span class="s0">public class </span><span class="s1">HUD { 
+ 
+    </span><span class="s0">public static int </span><span class="s1">HEALTH = </span><span class="s2">100</span><span class="s1">; 
+ 
+    </span><span class="s0">private int </span><span class="s1">greenValue = </span><span class="s2">255</span><span class="s1">; 
+ 
+    </span><span class="s0">private int </span><span class="s1">score = </span><span class="s2">0</span><span class="s1">; 
+    </span><span class="s0">private int </span><span class="s1">level = </span><span class="s2">1</span><span class="s1">; 
+ 
+    </span><span class="s0">public void </span><span class="s1">tick(){ 
+        HEALTH = Game.clamp(HEALTH, </span><span class="s2">0 </span><span class="s1">,</span><span class="s2">100</span><span class="s1">); 
+ 
+        greenValue = Game.clamp(greenValue,</span><span class="s2">0</span><span class="s1">,</span><span class="s2">255</span><span class="s1">); 
+        greenValue = HEALTH*</span><span class="s2">2</span><span class="s1">; 
+ 
+        score++; 
+ 
+        </span><span class="s0">if </span><span class="s1">( HEALTH == </span><span class="s2">0</span><span class="s1">) System.exit(</span><span class="s2">0</span><span class="s1">); 
+ 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">render(Graphics g){ 
+        g.setColor(Color.GRAY); 
+        g.fillRect(</span><span class="s2">15</span><span class="s1">,</span><span class="s2">15</span><span class="s1">,</span><span class="s2">200</span><span class="s1">,</span><span class="s2">32</span><span class="s1">); 
+        g.setColor(</span><span class="s0">new </span><span class="s1">Color(</span><span class="s2">75</span><span class="s1">,greenValue,</span><span class="s2">0</span><span class="s1">)); 
+        g.fillRect(</span><span class="s2">15</span><span class="s1">,</span><span class="s2">15</span><span class="s1">, HEALTH * </span><span class="s2">2</span><span class="s1">, </span><span class="s2">32</span><span class="s1">); 
+        g.setColor(Color.WHITE); 
+        g.drawRect(</span><span class="s2">15</span><span class="s1">,  </span><span class="s2">15</span><span class="s1">,</span><span class="s2">200</span><span class="s1">,</span><span class="s2">32</span><span class="s1">); 
+ 
+        g.drawString(</span><span class="s3">&quot;Score: &quot; </span><span class="s1">+ score, </span><span class="s2">15</span><span class="s1">, </span><span class="s2">64</span><span class="s1">); 
+        g.drawString(</span><span class="s3">&quot;Level: &quot; </span><span class="s1">+ level, </span><span class="s2">15</span><span class="s1">, </span><span class="s2">80</span><span class="s1">); 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">score(</span><span class="s0">int </span><span class="s1">score){ 
+        </span><span class="s0">this</span><span class="s1">.score = score; 
+    } 
+    </span><span class="s0">public int </span><span class="s1">getScore(){ 
+        </span><span class="s0">return </span><span class="s1">score; 
+    } 
+    </span><span class="s0">public int </span><span class="s1">getLevel(){ 
+        </span><span class="s0">return </span><span class="s1">level; 
+    } 
+    </span><span class="s0">public void </span><span class="s1">setLevel(</span><span class="s0">int </span><span class="s1">level){ 
+        </span><span class="s0">this</span><span class="s1">.level = level; 
+    } 
+} 
+</span></pre>
+</body>
+</html>

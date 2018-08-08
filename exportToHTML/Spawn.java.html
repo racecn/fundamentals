@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Spawn.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(0,0,255); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Spawn.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">import </span><span class="s1">java.util.Random; 
+ 
+</span><span class="s0">public class </span><span class="s1">Spawn { 
+ 
+    </span><span class="s0">private </span><span class="s1">Handler handler; 
+    </span><span class="s0">private </span><span class="s1">HUD hud; 
+    </span><span class="s0">private </span><span class="s1">Random r = </span><span class="s0">new </span><span class="s1">Random(); 
+ 
+ 
+    </span><span class="s0">private int </span><span class="s1">scoreKeep = </span><span class="s2">0</span><span class="s1">; 
+ 
+    </span><span class="s0">public </span><span class="s1">Spawn(Handler handler, HUD hud){ 
+        </span><span class="s0">this</span><span class="s1">.handler = handler; 
+        </span><span class="s0">this</span><span class="s1">.hud = hud; 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">tick(){ 
+        scoreKeep++; 
+ 
+        </span><span class="s3">//level change cap</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(scoreKeep % </span><span class="s2">500 </span><span class="s1">== </span><span class="s2">0</span><span class="s1">){ 
+            scoreKeep = </span><span class="s2">0</span><span class="s1">; 
+            hud.setLevel(hud.getLevel() + </span><span class="s2">1</span><span class="s1">); 
+            handler.addObject(</span><span class="s0">new </span><span class="s1">BasicEnemy(</span><span class="s2">300 </span><span class="s1">,</span><span class="s2">300</span><span class="s1">, ID.BasicEnemy, handler)); 
+        } 
+    } 
+ 
+ 
+} 
+</span></pre>
+</body>
+</html>

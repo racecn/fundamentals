@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="fundamentals:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/fundamentals_jar</output-path>
+    <root id="archive" name="fundamentals.jar">
+      <element id="module-output" name="fundamentals" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Libs/jars/jinput.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Libs/jars/jogg-0.0.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Libs/jars/jorbis-0.0.15.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Libs/jars/lwjgl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Libs/jars/slick.jar" path-in-jar="/" />
+      <element id="library" level="project" name="macosx" />
+    </root>
+  </artifact>
+</component>

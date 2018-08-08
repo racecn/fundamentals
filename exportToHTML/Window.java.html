@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Window.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(0,0,255); }
+.s3 { color: rgb(128,128,128); font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Window.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">import </span><span class="s1">javax.swing.*; 
+</span><span class="s0">import </span><span class="s1">java.awt.*; 
+ 
+</span><span class="s0">import </span><span class="s1">javax.swing.JFrame; 
+ 
+</span><span class="s0">public class </span><span class="s1">Window </span><span class="s0">extends </span><span class="s1">Canvas { 
+ 
+    </span><span class="s0">private static final long </span><span class="s1">serialVersionUID = -</span><span class="s2">8255319694373975038L</span><span class="s1">; 
+ 
+    </span><span class="s3">//creates window</span><span class="s1"> 
+ 
+    </span><span class="s0">public </span><span class="s1">Window(</span><span class="s0">int </span><span class="s1">width, </span><span class="s0">int </span><span class="s1">height, String title, Game game){ 
+        JFrame frame = </span><span class="s0">new </span><span class="s1">JFrame(title); 
+ 
+        frame.setPreferredSize(</span><span class="s0">new </span><span class="s1">Dimension(width, height)); 
+        frame.setMaximumSize(</span><span class="s0">new </span><span class="s1">Dimension(width, height)); 
+        frame.setMinimumSize(</span><span class="s0">new </span><span class="s1">Dimension(width, height)); 
+ 
+        </span><span class="s3">//stops game operations on window close</span><span class="s1"> 
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        frame.setResizable(</span><span class="s0">false</span><span class="s1">); 
+        </span><span class="s3">//puts window in center instead of top left</span><span class="s1"> 
+        frame.setLocationRelativeTo(</span><span class="s0">null</span><span class="s1">); 
+        frame.add(game); 
+        frame.setVisible(</span><span class="s0">true</span><span class="s1">); 
+        frame.setFocusable(</span><span class="s0">true</span><span class="s1">); 
+        game.start(); 
+ 
+ 
+    } 
+ 
+} 
+</span></pre>
+</body>
+</html>

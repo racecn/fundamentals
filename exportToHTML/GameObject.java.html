@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>GameObject.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+GameObject.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">import </span><span class="s1">java.awt.*; 
+ 
+</span><span class="s0">public abstract class </span><span class="s1">GameObject { 
+ 
+    </span><span class="s2">//protected means that it can only be accessed by a child object &quot;extends GameObject&quot;</span><span class="s1"> 
+    </span><span class="s0">protected int </span><span class="s1">x, y; 
+    </span><span class="s0">protected </span><span class="s1">ID id; 
+    </span><span class="s0">protected int </span><span class="s1">velX, velY; 
+ 
+    </span><span class="s0">public </span><span class="s1">GameObject( </span><span class="s0">int </span><span class="s1">x, </span><span class="s0">int </span><span class="s1">y, ID id){ 
+        </span><span class="s0">this</span><span class="s1">.x = x; 
+        </span><span class="s0">this</span><span class="s1">.y = y; 
+        </span><span class="s0">this</span><span class="s1">.id = id; 
+    } 
+ 
+    </span><span class="s0">public abstract void </span><span class="s1">tick(); 
+    </span><span class="s0">public abstract void </span><span class="s1">render(Graphics g); 
+    </span><span class="s0">public abstract </span><span class="s1">Rectangle getBounds(); 
+ 
+    </span><span class="s0">public void </span><span class="s1">setX(</span><span class="s0">int </span><span class="s1">x){ 
+        </span><span class="s0">this</span><span class="s1">.x = x; 
+    } 
+    </span><span class="s0">public void </span><span class="s1">setY(</span><span class="s0">int </span><span class="s1">y){ 
+        </span><span class="s0">this</span><span class="s1">.y = y; 
+    } 
+    </span><span class="s0">public int </span><span class="s1">getX(</span><span class="s0">int </span><span class="s1">x){ 
+        </span><span class="s0">return </span><span class="s1">x; 
+    } 
+    </span><span class="s0">public int </span><span class="s1">getY(</span><span class="s0">int </span><span class="s1">x){ 
+        </span><span class="s0">return </span><span class="s1">y; 
+    } 
+    </span><span class="s0">public void </span><span class="s1">setId(ID id){ 
+        </span><span class="s0">this</span><span class="s1">.id = id; 
+    } 
+    </span><span class="s0">public </span><span class="s1">ID getId(){ 
+        </span><span class="s0">return </span><span class="s1">id; 
+    } 
+    </span><span class="s0">public void </span><span class="s1">setVelX(</span><span class="s0">int </span><span class="s1">velX){ 
+        </span><span class="s0">this</span><span class="s1">.velX = velX; 
+    } 
+    </span><span class="s0">public void </span><span class="s1">setVelY(</span><span class="s0">int </span><span class="s1">velY){ 
+        </span><span class="s0">this</span><span class="s1">.velY = velY; 
+    } 
+    </span><span class="s0">public int </span><span class="s1">getVelX(){ 
+        </span><span class="s0">return </span><span class="s1">velX; 
+    } 
+    </span><span class="s0">public int </span><span class="s1">getVelY(){ 
+        </span><span class="s0">return </span><span class="s1">velY; 
+    } 
+ 
+} 
+</span></pre>
+</body>
+</html>
